@@ -3,24 +3,37 @@ MAD201 – Assignment 5
 Author: Jennyfer Parmar
 Student ID: A00201240
 Date: 10/12/25
-Description: Tab layout for All Tasks and Completed Tasks.
+Description: Root stack layout with TaskProvider and navigation.
 */
 
-import { Tabs } from "expo-router";
+import { Stack } from "expo-router";
 import React from "react";
+import { TaskProvider } from "../context/TaskContext";
 
-export default function TabsLayout() {
+export default function RootLayout() {
   return (
-    <Tabs>
-      <Tabs.Screen
-        name="index"
-        options={{ title: "All Tasks" }}
-      />
+    <TaskProvider> 
+      <Stack>
+        <Stack.Screen
+          name="(tabs)"
+          options={{ headerShown: false }} // Tabs handle their own header
+        />
 
-      <Tabs.Screen
-        name="completed"
-        options={{ title: "Completed" }}
-      />
-    </Tabs>
+        <Stack.Screen
+          name="add-task"
+          options={{ title: "Add Task" }} // Add Task screen
+        />
+
+        <Stack.Screen
+          name="task/[id]"
+          options={{ title: "Task Details" }} // Task details screen
+        />
+
+        <Stack.Screen
+          name="modal"
+          options={{ presentation: "modal", title: "Modal" }} // Optional modal
+        />
+      </Stack>
+    </TaskProvider>
   )
 }
